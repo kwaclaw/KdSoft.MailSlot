@@ -1,7 +1,19 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
+  <Import Project="..\common.props" />
+
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <Title>KdSoft.MailSlot</Title>
+    <Description>Windows MailSlot Library.</Description>
+    <VersionPrefix>1.0.0</VersionPrefix>
+    <TargetFrameworks>netstandard2.0;net45</TargetFrameworks>
+    <PackageReleaseNotes>
+      Provides asynchronous FileStream API for Windows Mailslots.
+    </PackageReleaseNotes>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\SharedAssemblyInfo.cs" />
+  </ItemGroup>
 
 </Project>

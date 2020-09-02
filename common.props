@@ -1,0 +1,27 @@
+<Project>
+
+  <PropertyGroup>
+    <Copyright>Copyright © Karl Waclawek 2020</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/kwaclaw/KdSoft.General</PackageProjectUrl>
+
+    <Authors>Karl Waclawek</Authors>
+    <Product>KD Soft Libraries</Product>
+    <Company>KD Soft</Company>
+
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <!-- <IncludeSymbols>True</IncludeSymbols> -->
+  </PropertyGroup>
+  
+  <PropertyGroup>
+    <CodeAnalysisRuleSet>..\Solution.ruleset</CodeAnalysisRuleSet>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Datestamp>$([System.DateTime]::Now.ToString("yyyy-MM-dd"))</Datestamp>
+    <Timestamp>$([System.DateTime]::Now.ToString("yyyy-MM-ddTHHmm"))</Timestamp>
+  </PropertyGroup>
+
+</Project>
