@@ -1,13 +1,11 @@
 ﻿using System;
 using System.IO;
 using System.Runtime.InteropServices;
-using System.Threading;
-using System.Threading.Tasks;
 using Microsoft.Win32.SafeHandles;
 
 namespace KdSoft.MailSlot
 {
-    public class MailSlot: IDisposable
+    public class MailSlot
     {
         #region DLL Imports
 
@@ -43,7 +41,7 @@ namespace KdSoft.MailSlot
 
         #endregion
 
-        public static FileStream CreateMailSlotClient(string name, string domain = ".") {
+        public static FileStream CreateClient(string name, string domain = ".") {
             var mailSlotUncName = $@"\\{domain}\mailslot\{name}";
             var handle = CreateFile(mailSlotUncName, FileAccess.Write, FileShare.ReadWrite, IntPtr.Zero, FileMode.Open, FileFlagOverlapped, IntPtr.Zero);
             if (handle.IsInvalid)
@@ -58,20 +56,7 @@ namespace KdSoft.MailSlot
             }
         }
 
-        readonly FileStream _stream;
-
-        public MailSlot(string name) {
-            var handle = CreateMailSlotHandle(name);
-            try {
-                _stream = new FileStream(handle, FileAccess.Read, 4096, true);
-            }
-            catch {
-                handle.Dispose();
-                throw;
-            }
-        }
-
-        SafeFileHandle CreateMailSlotHandle(string name) {
+        static SafeFileHandle CreateMailSlotHandle(string name) {
             var mailSlotUncName = $@"\\.\mailslot\{name}";
             var handle = CreateMailslot(mailSlotUncName, 0, unchecked((uint)-1), IntPtr.Zero);
             if (handle.IsInvalid)
@@ -79,16 +64,15 @@ namespace KdSoft.MailSlot
             return handle;
         }
 
-        public Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken = default) {
-            return _stream.ReadAsync(buffer, offset, count, cancellationToken);
-        }
-
-        public int Read(byte[] buffer, int offset, int count) {
-            return _stream.Read(buffer, offset, count);
-        }
-
-        public void Dispose() {
-            _stream?.Dispose();
+        public static FileStream CreateServer(string name) {
+            var handle = CreateMailSlotHandle(name);
+            try {
+                return new FileStream(handle, FileAccess.Read, 4096, true);
+            }
+            catch {
+                handle.Dispose();
+                throw;
+            }
         }
     }
 }

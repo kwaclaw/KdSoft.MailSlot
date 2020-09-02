@@ -8,7 +8,7 @@ namespace KdSoft.MailSlot.TestServer
     {
         static async Task Main(string[] args) {
             var buffer = new byte[16384];
-            using (var server = new MailSlot("test1")) {
+            using (var server = MailSlot.CreateServer("test1")) {
                 while (true) {
                     var count = await server.ReadAsync(buffer, 0, buffer.Length);
                     if (count == 0)
