@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Copyright>Copyright © Karl Waclawek 2020</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/kwaclaw/KdSoft.General</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/kwaclaw/KdSoft.MailSlot</PackageProjectUrl>
 
     <Authors>Karl Waclawek</Authors>
     <Product>KD Soft Libraries</Product>
