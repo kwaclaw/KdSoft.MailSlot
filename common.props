@@ -13,7 +13,7 @@
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <!-- <IncludeSymbols>True</IncludeSymbols> -->
   </PropertyGroup>
-  
+
   <PropertyGroup>
     <CodeAnalysisRuleSet>..\Solution.ruleset</CodeAnalysisRuleSet>
     <LangVersion>latest</LangVersion>

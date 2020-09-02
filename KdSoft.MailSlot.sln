@@ -7,7 +7,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KdSoft.MailSlot", "KdSoft.M
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KdSoft.MailSlot.TestServer", "KdSoft.MailSlot.TestServer\KdSoft.MailSlot.TestServer.csproj", "{7CF17DEC-034E-44D3-B926-3C254C16BF8B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KdSoft.MailSlot.TestClient", "KdSoft.MailSlot.TestClient\KdSoft.MailSlot.TestClient.csproj", "{DC621425-C42F-46CA-A8CE-65F9940343DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KdSoft.MailSlot.TestClient", "KdSoft.MailSlot.TestClient\KdSoft.MailSlot.TestClient.csproj", "{DC621425-C42F-46CA-A8CE-65F9940343DB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution", "Solution", "{44A93FB4-59CF-4206-952F-B2B2D94B6247}"
+	ProjectSection(SolutionItems) = preProject
+		common.props = common.props
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
