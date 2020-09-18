@@ -10,6 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\KdSoft.MailSlotListener\KdSoft.MailSlotListener.csproj" />
     <ProjectReference Include="..\KdSoft.MailSlot\KdSoft.MailSlot.csproj" />
   </ItemGroup>
 

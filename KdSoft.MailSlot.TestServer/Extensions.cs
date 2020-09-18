@@ -2,10 +2,8 @@
 using System.Buffers;
 using System.Text;
 
-namespace KdSoft.MailSlot.TestServer
-{
-    public static class Extensions
-    {
+namespace KdSoft.MailSlot.TestServer {
+    public static class Extensions {
         public static string GetString(this Encoding encoding, ref ReadOnlySequence<byte> bytes) {
             var decoder = encoding.GetDecoder();
             var preProcessedBytes = 0;
@@ -23,6 +21,10 @@ namespace KdSoft.MailSlot.TestServer
 
             var finalCharacters = characterSpan.Slice(0, processedCharacters);
             return new string(finalCharacters);
+        }
+
+        public static string GetString(this Encoding encoding, ReadOnlySequence<byte> bytes) {
+            return GetString(encoding, ref bytes);
         }
     }
 }

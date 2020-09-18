@@ -1,72 +1,49 @@
 ﻿using System;
 using System.Buffers;
-using System.IO.Pipelines;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
-namespace KdSoft.MailSlot.TestServer
-{
+namespace KdSoft.MailSlot.TestServer {
     class Program {
         const byte MessageSeparator = 0x03;
 
         static async Task Main(string[] args) {
-            var pipe = new Pipe();
-
-            var readTask = ReadMail(pipe.Reader);
-
-            using (var server = MailSlot.CreateServer("test1")) {
-                var writer = pipe.Writer;
-
-                while (true) {
-                    var memory = writer.GetMemory(4096);
-                    var count = await server.ReadAsync(memory);
-                    if (count == 0)
-                        break;
-
-                    writer.Advance(count);
-                    var writeResult = await writer.FlushAsync();
-                    if (writeResult.IsCompleted)
-                        break;
-                }
-
-                writer.Complete();
-            }
-
-            await readTask;
+            if (args.Length > 0 && args[0] == "async")
+                await ListenAsync();
+            else
+                await Listen();
         }
 
-        static async Task ReadMail(PipeReader reader) {
-            while (true) {
-                var readResult = await reader.ReadAsync();
-                var buffer = readResult.Buffer;
-
-                while (TryReadMessage(ref buffer, out var msgBytes)) {
-                    ProcessMessage(ref msgBytes);
-                }
-
-                reader.AdvanceTo(buffer.Start, buffer.End);
-            }
-        }
-
-        static bool TryReadMessage(ref ReadOnlySequence<byte> buffer, out ReadOnlySequence<byte> msgBytes) {
-            var pos = buffer.PositionOf(MessageSeparator);
-            if (pos == null) {
-                msgBytes = default;
-                return false;
-            }
-
-            msgBytes = buffer.Slice(0, pos.Value);
-
-            var nextStart = buffer.GetPosition(1, pos.Value);
-            buffer = buffer.Slice(nextStart);
-            return true;
-        }
+        static int msgCount;
+        static CancellationTokenSource tcs;
 
         static void ProcessMessage(ref ReadOnlySequence<byte> msgBytes) {
+            if (msgCount++ > 20)
+                tcs.Cancel();
             var msg = Encoding.UTF8.GetString(ref msgBytes);
             Console.WriteLine(msg);
         }
 
+        static Task Listen() {
+            msgCount = 0;
+            tcs = new CancellationTokenSource();
+            var listener = new MailSlotListener("test1", ProcessMessage, MessageSeparator, tcs.Token);
+            return listener.Task;
+        }
+
+        static async Task ListenAsync() {
+            var listener = new AsyncMailSlotListener("test1", 3);
+            int msgCount = 0;
+            var tcs = new CancellationTokenSource();
+
+            await foreach (var msgBytes in listener.GetNextMessage(tcs.Token)) {
+                if (msgCount++ > 20)
+                    tcs.Cancel();
+                var msg = Encoding.UTF8.GetString(msgBytes);
+                Console.WriteLine(msg);
+            }
+        }
 
         // Synchronous Version, not recommended
         //static void Main(string[] args) {
