@@ -15,6 +15,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution", "Solution", "{44
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KdSoft.MailSlotListener", "KdSoft.MailSlotListener\KdSoft.MailSlotListener.csproj", "{31627C86-3A78-428D-A876-261AF9EA1AFD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{8663B9F4-ECC2-4F82-A68C-67BA861335AD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,9 +37,17 @@ Global
 		{DC621425-C42F-46CA-A8CE-65F9940343DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC621425-C42F-46CA-A8CE-65F9940343DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DC621425-C42F-46CA-A8CE-65F9940343DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31627C86-3A78-428D-A876-261AF9EA1AFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31627C86-3A78-428D-A876-261AF9EA1AFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31627C86-3A78-428D-A876-261AF9EA1AFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31627C86-3A78-428D-A876-261AF9EA1AFD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7CF17DEC-034E-44D3-B926-3C254C16BF8B} = {8663B9F4-ECC2-4F82-A68C-67BA861335AD}
+		{DC621425-C42F-46CA-A8CE-65F9940343DB} = {8663B9F4-ECC2-4F82-A68C-67BA861335AD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BCE5B573-FE6A-43D1-890D-BDD2EF8E1B4E}
