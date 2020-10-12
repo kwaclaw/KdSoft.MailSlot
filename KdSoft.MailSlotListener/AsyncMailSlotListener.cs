@@ -16,7 +16,7 @@ namespace KdSoft.MailSlot {
         readonly CancellationToken _listenCancelToken;
 
         /// <summary>
-        /// Constructor for asynchnronous processing of mailslot messages.
+        /// Constructor for asynchronous processing of mailslot messages.
         /// </summary>
         /// <param name="mailslotName">Name of mail slot.</param>
         /// <param name="messageSeparator">Byte value that separates messages.</param>
@@ -69,12 +69,11 @@ namespace KdSoft.MailSlot {
                     buffer = readResult.Buffer;
                 }
                 catch (OperationCanceledException) {
-                    reader.Complete();
                     break;
                 }
                 catch (Exception ex) {
                     reader.Complete(ex);
-                    break;
+                    yield break;
                 }
 
                 while (TryReadMessage(ref buffer, out var msgBytes)) {
@@ -82,9 +81,11 @@ namespace KdSoft.MailSlot {
                 }
 
                 reader.AdvanceTo(buffer.Start, buffer.End);
-                if (readResult.IsCompleted)
-                    break;
+                if (readResult.IsCompleted || readResult.IsCanceled)
+                    yield break;
             }
+
+            reader.Complete();
         }
     }
 }
