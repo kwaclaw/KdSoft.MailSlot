@@ -1,1 +1,1 @@
-echo "This is a test mail message." > .\tmp1.txt & copy .\tmp1.txt \\.\mailslot\test1
+echo "This is a test mailslot message." > .\~MEM & move .\~MEM \\.\mailslot\test1

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace KdSoft.MailSlot.TestServer {
     class Program {
-        const byte MessageSeparator = 0x03;
+        const byte MessageSeparator = 0x07;
 
         static async Task Main(string[] args) {
             if (args.Length > 0 && args[0] == "async")
@@ -33,7 +33,7 @@ namespace KdSoft.MailSlot.TestServer {
         }
 
         static async Task ListenAsync() {
-            var listener = new AsyncMailSlotListener("test1", 3);
+            var listener = new AsyncMailSlotListener("test1", MessageSeparator);
             int msgCount = 0;
             var tcs = new CancellationTokenSource();
 

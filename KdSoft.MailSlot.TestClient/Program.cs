@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace KdSoft.MailSlot.TestClient {
     class Program {
-        const byte MessageSeparator = 0x03;
+        const byte MessageSeparator = 0x07;
 
         static async Task Main(string[] args) {
             var buffer = new byte[1024];
