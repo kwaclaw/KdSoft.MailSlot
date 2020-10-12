@@ -17,7 +17,8 @@ using (var client = MailSlot.CreateClient("test1")) {
 ```
 
 ## Receiving mailslot messages
-Just read asynchronously from the mailslot stream. This will not block a thread.
+### Read asynchronously from the mailslot stream.
+This will not block a thread.
 ```csharp
 var buffer = new byte[16384];
 using (var server = MailSlot.CreateServer("test1")) {
@@ -26,5 +27,13 @@ using (var server = MailSlot.CreateServer("test1")) {
         var msg = Encoding.UTF8.GetString(buffer, 0, count);
         Console.WriteLine(msg);
     }
+}
+```
+### Or use the AsyncMailSlotListener.
+```csharp
+var listener = new AsyncMailSlotListener("test1", 0x07);
+await foreach (var msgBytes in listener.GetNextMessage()) {
+    var msg = Encoding.UTF8.GetString(msgBytes);
+    Console.WriteLine(msg);
 }
 ```
