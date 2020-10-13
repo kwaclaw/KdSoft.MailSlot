@@ -50,7 +50,7 @@ namespace KdSoft.MailSlot {
                 }
                 catch (Exception ex) {
                     reader.Complete(ex);
-                    break;
+                    return;
                 }
 
                 while (TryReadMessage(ref buffer, out var msgBytes)) {
@@ -58,9 +58,11 @@ namespace KdSoft.MailSlot {
                 }
 
                 reader.AdvanceTo(buffer.Start, buffer.End);
-                if (readResult.IsCompleted)
-                    break;
+                if (readResult.IsCompleted || readResult.IsCanceled)
+                    return;
             }
+
+            reader.Complete();
         }
 
         /// <inheritdoc/>
