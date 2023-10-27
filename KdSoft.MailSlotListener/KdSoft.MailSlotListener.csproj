@@ -5,7 +5,7 @@
   <PropertyGroup>
     <Title>KdSoft.MailSlotListener</Title>
     <Description>Windows MailSlot Listener.</Description>
-    <VersionPrefix>1.0.2</VersionPrefix>
+    <VersionPrefix>1.0.3</VersionPrefix>
     <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
     <PackageReleaseNotes>
       Dependencies update.
@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.IO.Pipelines" Version="4.7.5" />
+    <PackageReference Include="System.IO.Pipelines" Version="6.0.3" />
   </ItemGroup>
 
   <ItemGroup>
