@@ -5,10 +5,10 @@
   <PropertyGroup>
     <Title>KdSoft.MailSlotListener</Title>
     <Description>Windows MailSlot Listener.</Description>
-    <VersionPrefix>1.0.3</VersionPrefix>
-    <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
+    <VersionPrefix>1.0.4</VersionPrefix>
+    <TargetFrameworks>net461;netstandard2.0;netstandard2.1</TargetFrameworks>
     <PackageReleaseNotes>
-      Dependencies update.
+      Added net461 target.
     </PackageReleaseNotes>
     <RootNamespace>KdSoft.MailSlot</RootNamespace>
   </PropertyGroup>
